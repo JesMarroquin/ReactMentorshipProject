@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { Avatar, Paper, Typography } from '@mui/material'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const userProfile = { 
+    name: "Jesus Marroquin", 
+    email: 'jesus@example.com', 
+    phone: 81123456789, 
+    address: '21 Main Street, Monterrey Nuevo Leon, CP65343' 
+  }
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Avatar style={{ width: 100, height: 100, marginBottom: 20, backgroundColor: 'gray' }}>
+                <Typography variant="h3">JM</Typography>
+            </Avatar>
+            <Typography variant="h4" gutterBottom>
+                {userProfile.name}
+            </Typography>
+            
+            <Paper style={{ width: '100%', padding: 20 }}>
+                <Typography variant="h6" gutterBottom>
+                    Information
+                </Typography>
+                <Typography>Email: {userProfile.email}</Typography>
+                <Typography>Phone: {userProfile.phone}</Typography>
+                <Typography>Address: {userProfile.address}</Typography>
+            </Paper>
+        </div>
     </>
   )
 }
