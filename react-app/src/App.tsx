@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <User/>
-      //TODO SHOW USERLISTS para mentees
+      {/* USERLISTS */}
     </>
   )
 }
