@@ -1,23 +1,18 @@
 import { Avatar, Paper, Typography } from '@mui/material';
 import React from 'react';
 
-export const User: React.FC = () => {
-
-    const active: boolean = false;
-
-    type USERS = {
+interface UserProps {
+    user:{
         name:string,
         email:string,
         phone:number,
         address:string
     }
+}
 
-    const userProfile:USERS = { 
-        name: "Jesus Marroquin", 
-        email: 'jesus@example.com', 
-        phone: 81123456789, 
-        address: '21 Main Street, Monterrey Nuevo Leon, CP65343' 
-      }
+export const User: React.FC<UserProps> = ({user}) => {
+
+    const active: boolean = false;
 
       /* CODE CHALLENGE: Method for grabbing initials */
       
@@ -27,7 +22,7 @@ export const User: React.FC = () => {
                 <Typography variant="h3">JM {/* CODE CHALLENGE:  */}</Typography>
             </Avatar>
             <Typography variant="h4" gutterBottom>
-                {userProfile.name}
+                {user.name}
             </Typography>
             
             {    
@@ -36,12 +31,11 @@ export const User: React.FC = () => {
                     <Typography variant="h6" gutterBottom>
                         Information
                     </Typography>
-                    <Typography>Email: {userProfile.email}</Typography>
-                    <Typography>Phone: {userProfile.phone}</Typography>
-                    <Typography>Address: {userProfile.address}</Typography>
+                    <Typography>Email: {user.email}</Typography>
+                    <Typography>Phone: {user.phone}</Typography>
+                    <Typography>Address: {user.address}</Typography>
                 </Paper> 
-            }
-                    
+            }   
         </div>
     );
 }
