@@ -1,16 +1,20 @@
 
 import { Typography } from '@mui/material'
-import { User } from './Components/User'
 import { UserList } from './Components/UserList'
+import { createContext, useEffect, useState } from 'react'
+
+
+interface USERS { 
+  name:string,
+  email:string,
+  phone:number,
+  address:string
+}
+
+export const userContext = createContext<null| USERS[]>(null);
 
 function App() {
 
-  type USERS = {
-    name:string,
-    email:string,
-    phone:number,
-    address:string
-}
 
 const userProfiles:USERS[] = [
   { 
@@ -33,15 +37,25 @@ const userProfiles:USERS[] = [
   }
 
 ]
+
+  const [users, setUsers] = useState<null|USERS[]>(null);
+
+  useEffect(() => {
+    setUsers(userProfiles);
+  },[])
+
+
   
   return (
     <div style={{display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', minHeight:'100vH'}}>
       <>
         <Typography variant='h1' >React Assessment Users CRUD</Typography>
       </>
+      <userContext.Provider value={users}>
       <div style={{display:'flex', flexDirection: 'column', justifyContent:'center', minWidth:'60vW'}}>
-        <UserList users={userProfiles}/>
+        <UserList/>
       </div>  
+      </userContext.Provider>
     </div>
   )
 }

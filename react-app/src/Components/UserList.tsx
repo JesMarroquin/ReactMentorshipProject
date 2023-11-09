@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
     AppBar, 
     Toolbar, 
@@ -18,11 +18,9 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
+import { userContext } from '../App';
 
 
-interface UserListsProps {
-    users: User[]
-}
 
 interface User {
     name:string,
@@ -32,7 +30,9 @@ interface User {
 }
 
 
-export const UserList:React.FC<UserListsProps> = ({users}) => {
+export const UserList:React.FC = () => {
+    const users = useContext(userContext);
+
     return (
         <div>
             <AppBar position="static">
@@ -67,7 +67,7 @@ export const UserList:React.FC<UserListsProps> = ({users}) => {
                             </TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    {users && <TableBody>
                         {users.map((user, idx) => {
                             return(
                                 <TableRow key={idx}>
@@ -82,7 +82,7 @@ export const UserList:React.FC<UserListsProps> = ({users}) => {
                             </TableRow>
                             )
                         })}
-                    </TableBody>
+                    </TableBody>}
                 </Table>
                 <Pagination count={1} variant="outlined" shape="rounded" style={{marginTop: 20}} />
             </Paper>
