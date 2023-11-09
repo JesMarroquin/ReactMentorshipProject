@@ -1,41 +1,68 @@
-import { Avatar, Paper, Typography } from '@mui/material';
-import React from 'react';
+import { Avatar, IconButton, Paper, Typography } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { userContext } from '../App';
+import { useNavigate, useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-interface UserProps {
-    user:{
-        name:string,
-        email:string,
-        phone:number,
-        address:string
-    }
+const defaultUser = {
+    id:0,
+    name: "no one", 
+    email: 'non existen', 
+    phone: 1234567890, 
+    address: 'NeverLand' 
 }
 
-export const User: React.FC<UserProps> = ({user}) => {
+export const User: React.FC = () => {
+    const {users} = useContext(userContext)
 
-    const active: boolean = false;
+    const {userID} = useParams();
+    const [user, setUser] = useState(defaultUser);
+    const navigate = useNavigate();
 
-      /* CODE CHALLENGE: Method for grabbing initials */
+
+    const getInitials = () => {
+        const names = user.name.split(' ');
+        const initials = names.map(n => n.charAt(0));
+        return initials.join('').toUpperCase();
+    };
+    useEffect(()=>{
+        const userTemp = users?.find(user => user.id.toString() === userID);
+        if(userTemp !== undefined){
+            setUser(userTemp);
+        }
+    }, [])
+
+    const goToTable = () => {
+        navigate("/Home");
+    }
       
     return(
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Avatar style={{ width: 100, height: 100, marginBottom: 20, backgroundColor: 'gray' }}>
-                <Typography variant="h3">JM {/* CODE CHALLENGE:  */}</Typography>
-            </Avatar>
-            <Typography variant="h4" gutterBottom>
-                {user.name}
-            </Typography>
-            
-            {    
-                active &&
-                <Paper style={{ width: '100%', padding: 20 }}>
-                    <Typography variant="h6" gutterBottom>
-                        Information
+        <>
+            <IconButton onClick={()=>goToTable()}>
+                <ArrowBackIcon/>
+            </IconButton>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                {user &&
+                <>
+                    <Avatar style={{ width: 100, height: 100, marginBottom: 20, backgroundColor: 'gray' }}>
+                        <Typography variant="h3">{getInitials()}</Typography>
+                    </Avatar>
+                    <Typography variant="h4" gutterBottom>
+                        {user.name} 
                     </Typography>
-                    <Typography>Email: {user.email}</Typography>
-                    <Typography>Phone: {user.phone}</Typography>
-                    <Typography>Address: {user.address}</Typography>
-                </Paper> 
-            }   
-        </div>
+                    
+                    <Paper style={{ width: '100%', padding: 20 }}>
+                        <Typography variant="h6" gutterBottom>
+                            Information
+                        </Typography>
+                        <Typography>Email:  {user.email} </Typography>
+                        <Typography>Phone: {user.phone}</Typography>
+                        <Typography>Address: {user.address} </Typography>
+                    </Paper>
+                </> 
+                }
+            </div>
+        </>
     );
 }

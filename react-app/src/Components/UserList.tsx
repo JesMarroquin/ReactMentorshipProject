@@ -19,6 +19,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import { userContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -32,6 +33,12 @@ interface User {
 
 export const UserList:React.FC = () => {
     const {users} = useContext(userContext);
+    const navigate = useNavigate();
+
+
+    const goToUser = (userID:number) => {
+        navigate(`/user/${userID}`);
+    }
 
     return (
         <div>
@@ -68,18 +75,18 @@ export const UserList:React.FC = () => {
                         </TableRow>
                     </TableHead>
                     {users && <TableBody>
-                        {users.map((user, idx) => {
+                        {users.map((user) => {
                             return(
-                                <TableRow key={idx}>
-                                <TableCell>{user.name}</TableCell>
-                                <TableCell>{user.phone}</TableCell>
-                                <TableCell>{user.address}</TableCell>
-                                <TableCell>
-                                    <IconButton>
-                                        <EditIcon />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
+                                <TableRow key={user.id}>
+                                    <TableCell>{user.name}</TableCell>
+                                    <TableCell>{user.phone}</TableCell>
+                                    <TableCell>{user.address}</TableCell>
+                                    <TableCell>
+                                        <IconButton onClick={()=>goToUser(user.id)}>
+                                            <EditIcon/>
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
                             )
                         })}
                     </TableBody>}
