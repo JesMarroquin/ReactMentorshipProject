@@ -5,10 +5,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { userContext } from '../Context/userContext';
 
 const defaultUser = {
-    id:0,
+    id:"0",
     name: "no one", 
     email: 'non existen', 
-    phone: 1234567890, 
+    phone: "1234567890", 
     address: 'NeverLand' 
 }
 
