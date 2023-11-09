@@ -18,17 +18,9 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
-import { userContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../Context/userContext';
 
-
-
-interface User {
-    name:string,
-    email:string,
-    phone:number,
-    address:string
-}
 
 
 export const UserList:React.FC = () => {
@@ -42,6 +34,9 @@ export const UserList:React.FC = () => {
 
     return (
         <div>
+            <>
+                <Typography variant='h1' >React Assessment Users CRUD</Typography>
+            </>
             <AppBar position="static">
                 <Toolbar>
                     <TextField 

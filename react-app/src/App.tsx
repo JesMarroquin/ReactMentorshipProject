@@ -1,27 +1,10 @@
-
-import { Typography } from '@mui/material'
 import { UserList } from './Components/UserList'
-import { createContext, useEffect, useState } from 'react'
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { User } from './Components/User'
-import { redirect } from "react-router-dom";
+import { USERS } from './Interfaces/Users'
+import { userContext } from './Context/userContext'
 
-
-
-interface USERS { 
-  id: number,
-  name:string,
-  email:string,
-  phone:number,
-  address:string
-}
-
-interface userContextProps {
-  users: null | USERS[]
-  setUsers: null | ((users:USERS[])=>void)
-}
-
-export const userContext = createContext<userContextProps>({users:null, setUsers:null});
 
 function App() {
 
@@ -53,7 +36,6 @@ const userProfiles:USERS[] = [
 
   const [users, setUsers] = useState<null|USERS[]>(null);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     setUsers(userProfiles);
@@ -61,11 +43,8 @@ const userProfiles:USERS[] = [
 
   return (
     <div style={{display:'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', minHeight:'100vH'}}>
-      <>
-        <Typography variant='h1' >React Assessment Users CRUD</Typography>
-      </>
       <userContext.Provider value={{users, setUsers}}>
-      <div style={{display:'flex', flexDirection: 'column', justifyContent:'center', minWidth:'60vW'}}>
+      <div>
         <Routes>
           <Route path='/Home' element={<UserList/>}/>
           <Route path= '/user/:userID' element = {<User/>}/>

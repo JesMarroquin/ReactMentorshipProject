@@ -1,8 +1,8 @@
 import { Avatar, IconButton, Paper, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { userContext } from '../App';
 import { useNavigate, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { userContext } from '../Context/userContext';
 
 const defaultUser = {
     id:0,
@@ -19,18 +19,19 @@ export const User: React.FC = () => {
     const [user, setUser] = useState(defaultUser);
     const navigate = useNavigate();
 
-
-    const getInitials = () => {
-        const names = user.name.split(' ');
-        const initials = names.map(n => n.charAt(0));
-        return initials.join('').toUpperCase();
-    };
     useEffect(()=>{
         const userTemp = users?.find(user => user.id.toString() === userID);
         if(userTemp !== undefined){
             setUser(userTemp);
         }
     }, [])
+
+
+    const getInitials = () => {
+        const names = user.name.split(' ');
+        const initials = names.map(n => n.charAt(0));
+        return initials.join('').toUpperCase();
+    };
 
     const goToTable = () => {
         navigate("/Home");
