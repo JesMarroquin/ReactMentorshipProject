@@ -5,10 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const defaultUser = {
-    id:0,
+    id:"0",
     name: "no one", 
     email: 'non existen', 
-    phone: 1234567890, 
+    phone: "1234567890", 
     address: 'NeverLand' 
 }
 
@@ -41,7 +41,7 @@ export const User: React.FC = () => {
             <IconButton onClick={()=>goToTable()}>
                 <ArrowBackIcon/>
             </IconButton>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',  minWidth: '40vW'}}>
 
                 {user &&
                 <>

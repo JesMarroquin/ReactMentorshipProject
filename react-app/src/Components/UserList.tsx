@@ -36,12 +36,15 @@ export const UserList:React.FC = () => {
     const navigate = useNavigate();
 
 
-    const goToUser = (userID:number) => {
+    const goToUser = (userID:string) => {
         navigate(`/user/${userID}`);
     }
 
     return (
         <div>
+            <>
+                <Typography variant='h1' >React Assessment Users CRUD</Typography>
+            </>
             <AppBar position="static">
                 <Toolbar>
                     <TextField 
