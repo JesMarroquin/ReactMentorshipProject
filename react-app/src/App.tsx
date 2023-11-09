@@ -11,7 +11,12 @@ interface USERS {
   address:string
 }
 
-export const userContext = createContext<null| USERS[]>(null);
+interface userContextProps {
+  users: null | USERS[]
+  setUsers: null | ((users:USERS[])=>void)
+}
+
+export const userContext = createContext<userContextProps>({users:null, setUsers:null});
 
 function App() {
 
@@ -51,7 +56,7 @@ const userProfiles:USERS[] = [
       <>
         <Typography variant='h1' >React Assessment Users CRUD</Typography>
       </>
-      <userContext.Provider value={users}>
+      <userContext.Provider value={{users, setUsers}}>
       <div style={{display:'flex', flexDirection: 'column', justifyContent:'center', minWidth:'60vW'}}>
         <UserList/>
       </div>  

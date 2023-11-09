@@ -31,7 +31,7 @@ interface User {
 
 
 export const UserList:React.FC = () => {
-    const users = useContext(userContext);
+    const {users} = useContext(userContext);
 
     return (
         <div>
